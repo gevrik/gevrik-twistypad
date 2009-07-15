@@ -122,13 +122,13 @@ copied to the proper location within $TWISTY/twisty/ .
 
 D.  Building the Java code
 
-In Eclipse, you'll need to create two different projects.
+ 1. Start a new "generic project" and choose "Android project".  In
+    the following dialog box, choose "based on existing source" and
+    then select $TWISTY/twisty/.
 
- 1. Start a new project based on existing source, and use $GLKJNI as
- the target.  Specifically, the 'roboglk' subdirectory is the target
- to build.
-
- 2. Start a new *android* project based on existing source, and use
- $TWISTY/twisty as the target.  It will depend on the .jars coming out
- of the glkjni project.
+ 2. Now open the project's properties (Project->Properties) and choose
+    "Java Build Path" from the list on the left.  Then choose the
+    'Source' tab and press the 'Link Source' button.  Navigate to
+    $GLKJNI/roboglk and select that directory.  It should now appear
+    in the list with $TWISTY/src and $TWISTY/gen.  Say OK.
 
