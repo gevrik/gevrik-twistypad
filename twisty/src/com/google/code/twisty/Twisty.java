@@ -103,6 +103,8 @@ public class Twisty extends Activity {
 	private TextBufferView tv;
 	private RoboTextBufferWindow mainWin;
 	
+	private TwistyTextBufferIO startScreen;
+	
 	// Passed down to ZState, so ZMachine thread can send Messages back to this thread
 	private Handler dialog_handler;
 	private TwistyMessage dialog_message; // most recent Message received
@@ -131,8 +133,14 @@ public class Twisty extends Activity {
 		// The main 'welcome screen' window from which games are launched.
 		tv = new TextBufferView(this);
 		final GlkEventQueue eventQueue = null;
+		
+		startScreen = new TwistyTextBufferIO(tv);
+		
 		mainWin = new RoboTextBufferWindow(this, eventQueue,
-					new StandardTextBufferIO(tv), MAIN_WINDOW_ID);
+					startScreen, MAIN_WINDOW_ID);
+		
+		tv.setFocusable(true);
+		setContentView(tv);
 		
 		printWelcomeMessage();
 		
@@ -172,10 +180,12 @@ public class Twisty extends Activity {
 		// TODO:  clear the screen?
 		// TODO:  set font-style to fixed, to set 'mood' for old-school text adventures
 		
-		mainWin.print("Twisty " + pkginfo.versionName + ", (C) Google Inc.");
-		mainWin.print("You are holding a modern-looking phone which can be typed upon.");		
+		startScreen.doReverseVideo(true);
+		startScreen.doPrint("Twisty " + pkginfo.versionName + ", (C) Google Inc.");
+		startScreen.doReverseVideo(false);
+		startScreen.doPrint("\n\nYou are holding a modern-looking phone which can be typed upon.");		
 		// TODO:  call appendBatteryState() below, beacuse it's cute.
-		mainWin.print("You feel an inexplicable urge to press the phone's \"menu\" key.");
+		startScreen.doPrint(" You feel an inexplicable urge to press the phone's \"menu\" key.");
 	}
 	
 	/* TODO:  rewrite this someday

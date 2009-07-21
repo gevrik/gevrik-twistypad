@@ -1,4 +1,4 @@
-twisty/project/libs/armeabi/lib.*
+twisty/libs/armeabi/lib.*
 .*\.class
 twisty/gen/com/google/code/twisty/R\.java
 twisty/\.project
