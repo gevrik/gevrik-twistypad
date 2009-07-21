@@ -101,6 +101,8 @@ public class Twisty extends Activity {
 	private TwistyTextBufferIO mainWin;
 	private TextBufferView tv;
 	
+	private TwistyTextBufferIO startScreen;
+	
 	// Passed down to ZState, so ZMachine thread can send Messages back to this thread
 	private Handler dialog_handler;
 	private TwistyMessage dialog_message; // most recent Message received
@@ -129,6 +131,7 @@ public class Twisty extends Activity {
 		// The main 'welcome screen' window from which games are launched.
 		tv = new TextBufferView(this);
 		mainWin = new TwistyTextBufferIO(tv);
+		final GlkEventQueue eventQueue = null;
 		tv.setFocusable(true);
 		setContentView(tv);
 		printWelcomeMessage();
@@ -170,9 +173,11 @@ public class Twisty extends Activity {
 		// TODO:  set font-style to fixed, to set 'mood' for old-school text adventures
 		StringBuffer battstate = new StringBuffer();
 		appendBatteryState(battstate);
-		
-		mainWin.doPrint("Twisty " + pkginfo.versionName + ", (C) Google Inc.\n\n");
-		mainWin.doPrint("(This is open source software;\nsee http://code.google.com/p/twisty)\n\n\n");
+
+		mainWin.doReverseVideo(true);
+		mainWin.doPrint("Twisty " + pkginfo.versionName + ", (C) Google Inc.");
+		mainWin.doReverseVideo(false);
+		mainWin.doPrint("\n\n(This is open source software;\nsee http://code.google.com/p/twisty)\n\n\n");
 		mainWin.doPrint("You are holding a modern-looking phone which can be typed upon.  ");
 		mainWin.doPrint(battstate.toString() + "  ");
 		mainWin.doPrint("You feel an inexplicable urge to press the phone's \"menu\" key.");
