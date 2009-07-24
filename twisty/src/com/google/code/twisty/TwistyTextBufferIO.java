@@ -22,6 +22,7 @@ import org.brickshadow.roboglk.window.TextBufferView;
 
 import android.os.Handler;
 import android.text.Spannable;
+import android.util.TypedValue;
 
 
 public class TwistyTextBufferIO extends StandardTextBufferIO {
@@ -46,9 +47,14 @@ public class TwistyTextBufferIO extends StandardTextBufferIO {
 	}
 	
 	private void initView() {
-		// TODO: read these from a resource
-		tv.setBackgroundColor(0xFFFFFFFF);
-		tv.setTextColor(0xFF000000);
+		TwistyStyle style = TwistyStyles.getStyleSpan(GlkStyle.Normal);
+		tv.setBackgroundColor(style.getBackColor());
+		/* 
+		 * TODO: remember that when style hints are supported, this
+		 *       size change will have to be made when style_Normal is
+		 *       assigned a new size.
+		 */
+		tv.setTextSize(style.getSize());
 		
 		applyStyle();
 	}
@@ -83,4 +89,8 @@ public class TwistyTextBufferIO extends StandardTextBufferIO {
 		applyStyle();
 	}
 
+	@Override
+	public int[] getWindowSize() {
+		return super.getWindowSize();
+	}
 }

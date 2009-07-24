@@ -30,6 +30,21 @@ public class TwistyStyle {
 	
 	// TODO: A constructor that reads the data from a resource
 	
+	public int getStyle() {
+		return style;
+	}
+	
+	public int getSize() {
+		return size;
+	}
+	
+	public int getForeColor() {
+		return foreColor;
+	}
+	
+	public int getBackColor() {
+		return backColor;
+	}
 	public TextAppearanceSpan getStyle(boolean reverse) {
 		return new TextAppearanceSpan(
 				family,
