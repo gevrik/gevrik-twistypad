@@ -5,10 +5,10 @@ What is this program?
 ---------------------
 
 Twisty is a game interpreter for the Android operating system.
-It allaws you to play "text adventures' on your mobile handset.
+It allaws you to play "text adventures" on your mobile handset.
 
 The z-machine is a virtual machine designed in 1979 by Infocom for
-playing text adventures, and has been re-implemented on nearly every
+playing text adventures, and it has been re-implemented on nearly every
 computer and PDA since then.  This application allows Android users to
 play Infocom classics just as 'Zork', as well hundreds of newer text
 adventures written in the last ten years or so.
@@ -56,13 +56,13 @@ collective Twisty product is thus safely all GPLv3-able.
 Three free, classic games are packaged with the application;  for
 details on their licensing, see the LICENSE file.  (This doesn't
 violate the GPL as far as we know, as these games aren't linked into
-the code, nor are they necessary fo the code to build or run.  They
+the code, nor are they necessary for the code to build or run.  They
 are merely interpreted and provided for convenience to users.)
 
 Patches are welcome!  Please mail us at twisty-dev@googlegroups.com.
 
 
-Insalling the .apk
+Installing the .apk
 -------------------
 
 The latest .apk can be downloaded directly from Google Code and pushed
@@ -79,10 +79,14 @@ Building from Source
 
 A.  Prerequisites
 
- 1. The Android SDK (at least version 1.6), unpacked and ready to go.
+ 1. The Android SDK (at least version 1.6), unpacked and ready to go. 
+ You can download the current SDK from http://developer.android.com/sdk 
 
  2. A working Eclipse installation (at least 3.5, "Galileo") with the
- latest Android plugin (ADT) installed, pointing to your Android SDK.
+ latest Android Development tools plugin (ADT) installed. To download 
+ the current ADT within Eclipse, open Preferences>Install/Update/Available
+ Sites, and Add "https://dl-ssl.google.com/android/eclipse/". You will also
+ need to provide a path to the SDK by opening Preferences>Android.
 
  3. The Android NDK (at least version 1.6) unpacked somewhere. (Say,
  at location $NDK).  Remember that after unpacking it, you need to run
@@ -99,7 +103,6 @@ A.  Prerequisites
 
  After getting glkjni, you may need to tweak the Makefile
  appropriately for your OS.
-
 
 B.  Assembling the Pieces
 
@@ -136,7 +139,7 @@ shared library:
    $ make APP=twisty
 
 After compilation, the final libtwistyterps.so will be automatically
-copied to the proper location within $TWISTY.
+copied to $TWISTY/twisty/libs/armeabi/
 
 (To forcibly rebuild, do a 'make APP=twisty clean' first.)
 
@@ -151,7 +154,26 @@ D.  Building the Java code
     "Java Build Path" from the list on the left.  Then choose the
     'Source' tab and press the 'Link Source' button.  Navigate to
     $GLKJNI/roboglk and select that directory.  It should now appear
-    in the list with $TWISTY/src and $TWISTY/gen.  Say OK.
+    in the list with $TWISTY/src and $TWISTY/gen. Now select the 'Order 
+    and Export' tab and arrange the build class order from top to bottom
+    as Twisty/glkjni/roboglk, Twisty/src, Twisty/gen, and Android 1.6. 
+    The box next to Android 1.6 should be checked.
 
- 3. In the same Project->Properties panel, choose "Java Compiler" and
+ 3. In the same Project->Properties panel, choose 'Java Compiler' and
     make sure it's set to Java compliance level 1.6.
+
+E.  Running Twisty in the Android Virtual Device (AVD)
+
+ 1. Twisty should now build correctly. To run it in an AVD, you must first
+    configure an AVD. This can be done through the menu Window->Android SDK
+    and AVD manager. Select 'Virtual devices' on the left, then press the
+    'New' button to create a new entry. Add a name and specify the target as 
+    'Android 1.6 - API level 4'. For SD card, you can make a new, blank card
+    by just indicating the size, e.g., 64M. Finally, choose a skin. You may
+    make more than one AVD. 
+
+ 2. To specify the AVD to run, select Run->Run Configuration. Select the 
+    'target' tab, and then check the box next to your choice of AVD.
+
+ 3. Select 'Run'. The emulator should launch, report mounting of the SDcard,
+    and then begin the Twisty activity.
