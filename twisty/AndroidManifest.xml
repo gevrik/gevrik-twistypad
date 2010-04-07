@@ -12,8 +12,13 @@
         	android:singleLine="false"
         	android:windowSoftInputMode="stateAlwaysVisible|adjustResize">
         	<intent-filter>
-       			<action android:name="android.intent.action.MAIN" />
-            	<category android:name="android.intent.category.LAUNCHER" />
+       			<action android:name="android.intent.action.VIEW" />
+       			<category android:name="android.intent.category.DEFAULT"/>
+        		<category android:name="android.intent.category.BROWSABLE"/>
+        		<data android:mimeType="application/x-zmachine"
+              	      android:scheme="http"
+                      android:host="*"
+                      android:pathPattern=".*\\.z.*"/>
         	</intent-filter>
         </activity>
     </application>

@@ -60,6 +60,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -177,8 +178,6 @@ public class Twisty extends Activity {
 		ll.addView(tv);
 		setContentView(ll);
 		
-		printWelcomeMessage();
-		
 		dialog_handler = new Handler() { 
 			public void handleMessage(Message m) {
 				savegame_dir = "";
@@ -216,6 +215,16 @@ public class Twisty extends Activity {
                gameIsRunning = false;
 			}
 		};
+		
+		Uri dataSource = this.getIntent().getData();
+		if (dataSource != null) {
+			mainWin.doPrint("I appear to have been invoked on " + dataSource.toString());
+		}
+		else {
+			mainWin.doPrint("I was not invoked via some Intent with Data.");
+		}
+		
+		printWelcomeMessage();
 	}
 	
 
